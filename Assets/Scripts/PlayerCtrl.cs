@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +9,15 @@ public class PlayerCtrl : MonoBehaviour
     public Text startText;
     public int HP;
     public int score;
+    public AudioClip fireSound;
+    private AudioSource audioSource;
 
     private void Start()
     {
         HP = 50;
         score = 0;
         UpdatetState();
+        audioSource = this.GetComponent<AudioSource>();
     }
     
     private void Update()
@@ -39,5 +39,6 @@ public class PlayerCtrl : MonoBehaviour
     void Fire()
     {
         Instantiate(bullet, firePosition.position, firePosition.rotation);
+        audioSource.PlayOneShot(fireSound);
     }
 }

@@ -102,6 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  hitEffect: {fileID: 138338, guid: cd1ff9e92aad8ac4db78b6ffd5f1eab7, type: 3}
+  shotEffect: {fileID: 123640, guid: 9242b15a276bc5a4babd09239e5fa709, type: 3}
 --- !u!1 &5094196544445782157
 GameObject:
   m_ObjectHideFlags: 0

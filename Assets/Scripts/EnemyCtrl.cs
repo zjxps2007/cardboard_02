@@ -11,6 +11,8 @@ public class EnemyCtrl : MonoBehaviour
     public GameObject player;
     private PlayerCtrl playerState;
     private Animator anim;
+    public GameObject hitEffect;
+    public GameObject shotEffect;
 
     private void Start()
     {
@@ -46,6 +48,10 @@ public class EnemyCtrl : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         Destroy(this.gameObject);
+        
+        GameObject shot = Instantiate(shotEffect, this.transform.position, this.transform.rotation);
+        Destroy(shot, 1.0f);
+        
         playerState.HP -= 10;
         playerState.UpdatetState();
     }
@@ -68,8 +74,9 @@ public class EnemyCtrl : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             HP -= 10;
-            
             Destroy(other.gameObject);
+            GameObject hit = Instantiate(hitEffect, other.transform.position, other.transform.rotation);
+            Destroy(hit, 1.0f);
             StartCoroutine(DelayMove());
 
             if (HP <= 0)
