@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     public int score;
     public AudioClip fireSound;
     private AudioSource audioSource;
+    private bool shoot = true;
 
     private void Start()
     {
@@ -24,9 +26,9 @@ public class PlayerCtrl : MonoBehaviour
     {
         firePosition.rotation = mainCam.rotation;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && shoot)
         {
-            Fire();
+            StartCoroutine(Fire());
         }
     }
 
@@ -34,11 +36,13 @@ public class PlayerCtrl : MonoBehaviour
     {
         startText.text = " Score\n" + score + "\n" + " HP\n" + HP;
     }
-    
 
-    void Fire()
+    IEnumerator Fire()
     {
+        shoot = false;
         Instantiate(bullet, firePosition.position, firePosition.rotation);
         audioSource.PlayOneShot(fireSound);
+        yield return new WaitForSeconds(0.2f);
+        shoot = true;
     }
 }
