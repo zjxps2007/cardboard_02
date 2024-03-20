@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerCtrl : MonoBehaviour
@@ -30,6 +31,11 @@ public class PlayerCtrl : MonoBehaviour
         {
             StartCoroutine(Fire());
         }
+
+        if (HP <= 0)
+        {
+            StartCoroutine(ReStart());
+        }
     }
 
     public void UpdatetState()
@@ -44,5 +50,11 @@ public class PlayerCtrl : MonoBehaviour
         audioSource.PlayOneShot(fireSound);
         yield return new WaitForSeconds(0.2f);
         shoot = true;
+    }
+
+    IEnumerator ReStart()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
